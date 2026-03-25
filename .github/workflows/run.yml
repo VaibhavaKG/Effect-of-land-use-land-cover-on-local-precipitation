@@ -19,4 +19,4 @@ jobs:
         pip install xarray pandas numpy matplotlib seaborn scipy statsmodels netCDF4
 
     - name: Run script
-      run: python project.py
+      run: python rainfall.py
