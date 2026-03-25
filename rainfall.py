@@ -42,20 +42,20 @@ print("\nData preview:\n", df.head())
 # CORRELATION METHODS 
 # Using YEAR as independent variable
 
-print("\n--- Pearson Correlation (Rainfall vs Time) ---")
+print("\n Pearson Correlation (Rainfall vs Time)")
 for loc in df["Location"].unique():
     sub = df[df["Location"] == loc]
     r, p = pearsonr(sub["YEAR"], sub["RAINFALL"])
     print(f"{loc}: r = {r:.3f}, p = {p:.3f}")
 
-print("\n--- Spearman Correlation (Rainfall vs Time) ---")
+print("\n Spearman Correlation (Rainfall vs Time)")
 for loc in df["Location"].unique():
     sub = df[df["Location"] == loc]
     r, p = spearmanr(sub["YEAR"], sub["RAINFALL"])
     print(f"{loc}: rho = {r:.3f}, p = {p:.3f}")
 
 #  LINEAR REGRESSION 
-print("\n--- Linear Regression (Rainfall ~ Year) ---")
+print("\n Linear Regression (Rainfall ~ Year)")
 
 model_time = smf.ols("RAINFALL ~ YEAR", data=df).fit()
 print(model_time.summary())
@@ -63,7 +63,7 @@ print(model_time.summary())
 
 #  MULTIPLE REGRESSION 
 # Adding location effect
-print("\n--- Multiple Regression (Rainfall ~ Year + Location) ---")
+print("\n Multiple Regression (Rainfall ~ Year + Location)")
 
 model_multi = smf.ols("RAINFALL ~ YEAR + C(Location)", data=df).fit()
 print(model_multi.summary())
@@ -71,7 +71,7 @@ print(model_multi.summary())
 
 # TIME-LAGGED CORRELATION 
 
-print("\n--- Time-Lagged Correlation (lag = 1 year) ---")
+print("\n Time-Lagged Correlation (lag = 1 year)")
 
 for loc in df["Location"].unique():
     sub = df[df["Location"] == loc].sort_values("YEAR")
