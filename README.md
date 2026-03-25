@@ -1,4 +1,4 @@
-> # Project: **Effect of Land Use on Local Precipitation**
+# Project: **Effect of Land Use on Local Precipitation**
 
 > ## Objective:
 Analyse how urbanisation (land use change) influences local rainfall patterns using statistical and data analysis methods.
@@ -8,9 +8,9 @@ Rainfall:
 Land Use: 
 
 > ## Key Analysis
-### Comparing urban vs rural regions
-### Studying temporal changes (before vs after urban growth)
-### Analysing seasonal effects (monsoon vs non-monsoon)
+Comparing urban vs rural regions
+Studying temporal changes (before vs after urban growth)
+Analysing seasonal effects (monsoon vs non-monsoon)
 
 > ## Correlation Methods
 1. Linear Regression (OLS)
@@ -21,6 +21,6 @@ Land Use:
 6. Independent Two-Sample t-Test
 
 > ## Expected Outcome
-### Detect correlation between urbanisation and rainfall
-### Identifying local-scale effects rather than global trends
-### Quantifying relationship strength using statistical metrics
+Detect correlation between urbanisation and rainfall
+Identifying local-scale effects rather than global trends
+Quantifying relationship strength using statistical metrics
