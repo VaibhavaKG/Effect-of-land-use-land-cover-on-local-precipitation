@@ -20,6 +20,10 @@ Analysing seasonal effects (monsoon vs non-monsoon)
 5. Time-Lagged Correlation
 6. Independent Two-Sample t-Test
 
+> ## Clustering Methods 
+1. Hierarchical Agglomerative Clustering (HAC)
+2. K-Means Clustering (for Pattern Identification)
+
 > ## Expected Outcome
 Detect correlation between urbanisation and rainfall
 Identifying local-scale effects rather than global trends
