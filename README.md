@@ -25,7 +25,7 @@ Analysing seasonal effects (monsoon vs non-monsoon)
 > ## Correlation Methods
 1. Linear Regression (OLS)
 2. Multiple Linear Regression
-3. Independent Two-Sample t-Test
+3. Pearson Coefficient
 
 > ## Clustering Methods 
 K-Means Clustering (for Pattern Identification)
