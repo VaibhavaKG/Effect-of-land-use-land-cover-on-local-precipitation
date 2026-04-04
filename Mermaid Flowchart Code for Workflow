@@ -1,17 +1,17 @@
 graph TD
-    A[Effect of land use on<br/>local precipitation]
-    A --> B[Data collection<br/>Rainfall data + land use data]
-    B --> C[Rainfall<br/>Continuous variable]
-    B --> D[Land use<br/>Discrete variable]
-    C --> E[Probability & distribution<br/>Normal or Gamma distribution fit?]
+    A[*Effect of land use on<br/>local precipitation*]
+    A --> B[**Data collection** <br/> Rainfall data + Landuse data]
+    B --> C[**Rainfall** <br/> Continuous variable]
+    B --> D[**Land use** <br/> Discrete variable]
+    C --> E[**Probability & Distribution** <br/>Normal or Gamma distribution fit?]
     D --> E
-    E --> F[Moments<br/>Mean, variance, skewness, kurtosis]
-    E --> G[Quantile function<br/>1-in-10-year extreme rainfall]
-    F --> H[Key analysis<br/>Urban vs rural: temporal-seasonal]
+    E --> F[**Moments** <br/> Mean, variance, skewness, kurtosis]
+    E --> G[**Quantile function** <br/> 1-in-10-year extreme rainfall]
+    F --> H[**Key analysis** <br/> Urban vs rural: temporal-seasonal]
     G --> H
-    H --> I[Correlation methods<br/>Pearson correlation<br/>Multiple linear regression<br/>Independent samples t-test]
-    H --> J[Clustering methods<br/>K-means clustering<br/>Cluster 1: High rain, low urbanisation<br/>Cluster 2: Low rain, high urbanisation]
-    I --> K[Expected outcomes<br/>Correlation between urbanisation and rainfall<br/>Local-scale effects quantified<br/>Relationship strength via statistical metrics]
+    H --> I[**Correlation methods** <br/>Pearson correlation<br/>Multiple linear regression<br/>Independent samples t-test]
+    H --> J[**Clustering methods** <br/>K-means clustering<br/>Cluster 1: High rain, low urbanisation<br/>Cluster 2: Low rain, high urbanisation]
+    I --> K[**Expected outcomes** <br/>*Correlation between urbanisation and rainfall* <br/> *Local-scale effects quantified* <br/> *Relationship strength via statistical metrics*]
     J --> K
 
 
