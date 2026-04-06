@@ -8,7 +8,7 @@ ds = xr.open_dataset("yearly_sum.nc")
 rain = ds['RAINFALL']
 
 
-# City coordinates
+# 1. City coordinates
 cities = {
     "Ahmedabad": (23.0225, 72.5714),
     "Bengaluru": (12.9716, 77.5946),
@@ -24,7 +24,7 @@ cities = {
 }
 
 
-# Function
+# 2. Function
 def get_city_data(lat, lon):
     data = rain.sel(LATITUDE=lat, LONGITUDE=lon, method='nearest').values
     return data[~np.isnan(data)]
@@ -77,7 +77,7 @@ plt.tight_layout(rect=[0, 0, 0.95, 0.96])
 plt.show()
 
 
-# COMBINED ANALYSIS
+# 3. COMBINED ANALYSIS
 all_data = np.array(all_data)
 
 mean = np.mean(all_data)
@@ -100,7 +100,7 @@ print("KS Gamma:", ks_gamma.statistic)
 print("Better Fit:", "Gamma" if ks_gamma.statistic < ks_norm.statistic else "Normal")
 
 
-# FINAL COMBINED PLOT
+# 4. FINAL COMBINED PLOT
 x = np.linspace(min(all_data), max(all_data), 300)
 
 plt.figure(figsize=(8, 5))
@@ -124,7 +124,7 @@ plt.show()
 #KS Gamma: 0.2874445623556556
 #Better Fit: Gamma
 
-# 7. MONTE CARLO (BOOTSTRAP)
+# 5. MONTE CARLO (BOOTSTRAP)
 n_sim = 1000
 sample_size = len(all_data)
 
