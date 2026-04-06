@@ -53,8 +53,8 @@ for city, (lat, lon) in cities.items():
     ax = axes[valid_idx]
 
     ax.hist(data, bins="auto", density=True, alpha=0.6)
-    ax.plot(x, norm.pdf(x, mu, sigma), linewidth=1.5)
-    ax.plot(x, gamma.pdf(x, shape, loc, scale), linewidth=1.5)
+    ax.plot(x, norm.pdf(x, mu, sigma), color='blue', linewidth=1.5)       # CHANGED
+    ax.plot(x, gamma.pdf(x, shape, loc, scale), color='orange', linewidth=1.5)  # CHANGED
 
     ax.set_title(city, fontsize=10)
     ax.grid(alpha=0.3)
@@ -67,8 +67,8 @@ for j in range(valid_idx, len(axes)):
 
 # Global legend
 handles = [
-    plt.Line2D([0], [0], linewidth=1.5),
-    plt.Line2D([0], [0], linewidth=1.5)
+    plt.Line2D([0], [0], color='blue', linewidth=1.5),       # CHANGED
+    plt.Line2D([0], [0], color='orange', linewidth=1.5)       # CHANGED
 ]
 fig.legend(handles, ["Normal", "Gamma"], loc="upper right", fontsize=10)
 
@@ -106,8 +106,8 @@ x = np.linspace(min(all_data), max(all_data), 300)
 plt.figure(figsize=(8, 5))
 plt.hist(all_data, bins="auto", density=True, alpha=0.6)
 
-plt.plot(x, norm.pdf(x, mu, sigma), linewidth=2, label="Normal")
-plt.plot(x, gamma.pdf(x, shape, loc, scale), linewidth=2, label="Gamma")
+plt.plot(x, norm.pdf(x, mu, sigma), color='blue', linewidth=2, label="Normal")        # CHANGED
+plt.plot(x, gamma.pdf(x, shape, loc, scale), color='orange', linewidth=2, label="Gamma")  # CHANGED
 
 plt.title("Combined Rainfall Distribution (All Cities)", fontsize=14)
 plt.xlabel("Rainfall")
@@ -124,7 +124,94 @@ plt.show()
 #KS Gamma: 0.2874445623556556
 #Better Fit: Gamma
 
-# 5. MONTE CARLO (BOOTSTRAP)
+
+# 5. HYPOTHESIS TESTING
+from scipy.stats import ttest_ind
+import numpy as np
+
+# Defining groups based on urbanization 
+high_urban = ["Ahmedabad", "Pune", "Pimpri-Chinchwad", "Bengaluru", "Hyderabad"]
+low_urban = ["Meghalaya", "Bihar"]
+
+high_data = []
+low_data = []
+
+for city, (lat, lon) in cities.items():
+    data = get_city_data(lat, lon)
+
+    if len(data) < 5:
+        continue
+
+    if city in high_urban:
+        high_data.extend(data)
+    elif city in low_urban:
+        low_data.extend(data)
+
+high_data = np.array(high_data)
+low_data = np.array(low_data)
+
+# 5.1 p-test (t-test + p-value)
+print("\n5.1 p-test")
+print("H0: Mean rainfall (High Urban) = Mean rainfall (Low Urban)")
+print("H1: Mean rainfall (High Urban) ≠ Mean rainfall (Low Urban)")
+
+t_stat, p_value = ttest_ind(high_data, low_data, equal_var=False)
+
+print("\nTest Results:")
+print("Sample size (High Urban):", len(high_data))
+print("Sample size (Low Urban):", len(low_data))
+
+print("Mean (High Urban):", np.mean(high_data))
+print("Mean (Low Urban):", np.mean(low_data))
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+
+# 5.2 Decision Rule
+alpha = 0.05
+
+print("\n5.2 Decision")
+if p_value < alpha:
+    print("Reject H0 → Significant difference in rainfall")
+else:
+    print("Fail to reject H0 → No significant difference detected")
+
+#5.1 p-test
+# H0: Mean rainfall (High Urban) = Mean rainfall (Low Urban)
+# H1: Mean rainfall (High Urban) ≠ Mean rainfall (Low Urban)
+
+#Test Results:
+# Sample size (High Urban): 70
+# Sample size (Low Urban): 28
+# Mean (High Urban): 1384.7402
+# Mean (Low Urban): 3315.8574
+# t-statistic: -3.0262688173482957
+# p-value: 0.0050167975987660905
+
+#5.2 Decision
+# Reject H0 → Significant difference in rainfall
+#  Analytical Confidence Interval: 95% CI: [1288.95, 1931.88]
+
+# 6.  CONFIDENCE INTERVALS
+
+# 6.1. Analytical CI (fast, standard)
+from scipy.stats import t
+
+n = len(all_data)
+mean = np.mean(all_data)
+std = np.std(all_data, ddof=1)
+
+# 95% CI
+t_crit = t.ppf(0.975, df=n-1)
+margin = t_crit * std / np.sqrt(n)
+
+ci_lower = mean - margin
+ci_upper = mean + margin
+
+print("\n Analytical Confidence Interval ")
+print(f"95% CI: [{ci_lower:.2f}, {ci_upper:.2f}]")
+
+# 6.2. MONTE CARLO (BOOTSTRAP)
 n_sim = 1000
 sample_size = len(all_data)
 
@@ -140,7 +227,7 @@ means = np.array(means)
 lower = np.percentile(means, 2.5)
 upper = np.percentile(means, 97.5)
 
-print("\n=== Monte Carlo Results ===")
+print("\n Monte Carlo Results ")
 print(f"Mean estimate = {np.mean(means):.2f}")
 print(f"95% Confidence Interval = [{lower:.2f}, {upper:.2f}]")
 
@@ -148,8 +235,8 @@ print(f"95% Confidence Interval = [{lower:.2f}, {upper:.2f}]")
 plt.figure(figsize=(8,5))
 plt.hist(means, bins=30, density=True, alpha=0.6)
 
-plt.axvline(lower, linestyle='--', label='Lower CI')
-plt.axvline(upper, linestyle='--', label='Upper CI')
+plt.axvline(lower, color='red', linestyle='--', label='Lower CI')     # CHANGED
+plt.axvline(upper, color='green', linestyle='--', label='Upper CI')   # CHANGED
 
 plt.title("Monte Carlo Simulation (Bootstrap of Mean Rainfall)")
 plt.xlabel("Mean Rainfall")
@@ -160,3 +247,7 @@ plt.show()
 
 # Monte Carlo bootstrapping was used to estimate the uncertainty in mean rainfall. 
 # The resulting confidence interval confirms the stability of the statistical estimates
+
+#Monte Carlo Results
+#Mean estimate = 1611.46
+#95% Confidence Interval = [1317.16, 1945.78]
