@@ -123,3 +123,40 @@ plt.show()
 #KS Normal: 0.35038598357887
 #KS Gamma: 0.2874445623556556
 #Better Fit: Gamma
+
+# 7. MONTE CARLO (BOOTSTRAP)
+n_sim = 1000
+sample_size = len(all_data)
+
+means = []
+
+for _ in range(n_sim):
+    sample = np.random.choice(all_data, size=sample_size, replace=True)
+    means.append(np.mean(sample))
+
+means = np.array(means)
+
+# Confidence Interval
+lower = np.percentile(means, 2.5)
+upper = np.percentile(means, 97.5)
+
+print("\n=== Monte Carlo Results ===")
+print(f"Mean estimate = {np.mean(means):.2f}")
+print(f"95% Confidence Interval = [{lower:.2f}, {upper:.2f}]")
+
+# Plot
+plt.figure(figsize=(8,5))
+plt.hist(means, bins=30, density=True, alpha=0.6)
+
+plt.axvline(lower, linestyle='--', label='Lower CI')
+plt.axvline(upper, linestyle='--', label='Upper CI')
+
+plt.title("Monte Carlo Simulation (Bootstrap of Mean Rainfall)")
+plt.xlabel("Mean Rainfall")
+plt.ylabel("Density")
+plt.legend()
+plt.grid(alpha=0.3)
+plt.show()
+
+# Monte Carlo bootstrapping was used to estimate the uncertainty in mean rainfall. 
+# The resulting confidence interval confirms the stability of the statistical estimates
