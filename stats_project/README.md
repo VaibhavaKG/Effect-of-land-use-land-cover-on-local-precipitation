@@ -30,8 +30,8 @@ This module covers the **statistical analysis of mean rainfall** across 8 cities
 
 ```
 stats_project/
-├── kg_final_code.py                          ← main analysis script
-├── kg_final_code.ipynb                       ← Jupyter notebook version
+├── rainfall_analysis_updated.py                          ← main analysis script
+├── rainfall_analysis_updated.ipynb                       ← Jupyter notebook version
 ├── yearly_mean_rainfall_builtup_cities.csv
 ├── yearly_mean_rainfall_builtup_states.csv
 ├── jjas_mean_rain_cities.csv
