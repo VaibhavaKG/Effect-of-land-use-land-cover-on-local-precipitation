@@ -1,4 +1,4 @@
-# Project: **Effect of Land Use on Local Precipitation**
+# Project: **Effect of Land Use on Local Precipitation 2005 - 2017**
 
 > ## Objective:
 Analyse how urbanisation (land use change) influences local rainfall patterns using statistical and data analysis methods. 
@@ -15,7 +15,7 @@ Determining the "1-in-10-year" extreme rainfall event using quantiles.
 
 > ## Data Sources:
 Rainfall: IMD gridded data
-Land Use: WRIS, National Remote Sensing Centre (NRSC) only available for #2005-2017#
+Land Use: WRIS, National Remote Sensing Centre (NRSC) only available for 2005-2017
 
 > ## Key Analysis
 Comparing urban vs rural regions
