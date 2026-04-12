@@ -14,7 +14,7 @@ Calculate the Mean, Variance, Skewness (is the rainfall skewed toward dry years?
 Determining the "1-in-10-year" extreme rainfall event using quantiles.
 
 > ## Data Sources:
-Rainfall: IMD gridded data \n
+Rainfall: IMD gridded data 
 Land Use: WRIS, National Remote Sensing Centre (NRSC) only available for **2005-2017**
 
 > ## Key Analysis
